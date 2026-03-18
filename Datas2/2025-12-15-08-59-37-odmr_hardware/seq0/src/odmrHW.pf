@@ -1,0 +1,19 @@
+%Duration	Channel	Laser	Waveforms
+
+%Variable definitions
+$switchingPeriod = 200u
+$dfStart = -200u
+$fStep = 5u
+$mwAmp = 1
+
+%Pulse sequence
+%Signal
+$switchingPeriod/2	1cw	1	pulse($mwAmp, 0, [$dfStart:$fStep])
+
+
+
+
+
+
+
+

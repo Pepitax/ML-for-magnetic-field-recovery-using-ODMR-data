@@ -1,0 +1,177 @@
+{
+    "version": "0.3.0",
+    "diamond_cut": "100",
+    "field": "",
+    "serial_number": "",
+    "operator": "",
+    "sample": "",
+    "suffix": "",
+    "vectorMagnetSettings": {
+        "field_strength": 9.999399831989919,
+        "theta": 125.24925965395404,
+        "phi": 90.0,
+        "current_1": -0.395,
+        "current_2": -0.593,
+        "current_3": -0.426
+    },
+    "laserPower": {
+        "Laser": 0.04
+    },
+    "microwavePower": {
+        "Main Source": 15.0
+    },
+    "microwaveFrequency": {
+        "Main Source": 2538642801.0
+    },
+    "carrierFrequency": {
+        "Main Source": 200000000.0
+    },
+    "tuningForkSettings": {
+        "drive": 0.09752099358720001,
+        "use_frequency": 32192.730212500002,
+        "amplitude": 0.052895942268116086,
+        "Q": 1528.5688850633244,
+        "resonance": 32195.222527556292,
+        "ref_percentage": 45.0
+    },
+    "odmrParameters": {
+        "name": "",
+        "centerFreq": 2716142183.493088,
+        "freqSpan": 400000000.0,
+        "stepSize": 4000000.0,
+        "nrPoints": 100,
+        "mwAmp": 0.6,
+        "nrOfPeaks": 1,
+        "seqTempPath": "C:\\Users\\Supervisor\\QS3\\Pulse Programs\\Sequence Templates\\odmr.seqt",
+        "expType": 2,
+        "odmrLaser": {
+            "switchingPeriod": 2e-05,
+            "pointDuration": 0.1,
+            "runs": 1
+        },
+        "odmrSoftware": {
+            "switchingPeriod": 2e-05,
+            "pointDuration": 0.1,
+            "runs": 1,
+            "updateCF": false
+        },
+        "odmrHardware": {
+            "switchingPeriod": 2e-05,
+            "integrationTime": 15.0,
+            "record_ref": false,
+            "updateCF": true,
+            "power_sweep": false
+        },
+        "odmrPulsed": {
+            "pulseLength": 1e-06,
+            "integrationTime": 30.0,
+            "updateCF": false,
+            "ref": false,
+            "twotone": false,
+            "pulsedInit": false
+        },
+        "odmrQuick": {
+            "quickSweepRate": 10.0,
+            "switchingPeriod": 2e-05,
+            "estType": 0,
+            "LOfeedback": false,
+            "AWGTracking": false,
+            "trackingType": 0,
+            "fullFreqSpan": 190000000.0,
+            "spanCenterFreqOffset": 153857816.50691223,
+            "spectrumSimulation": false
+        },
+        "dualMode": 0,
+        "dualModeOptions": {
+            "centerFreq2": 2900000000.0,
+            "zfs": 2870000000.0
+        },
+        "samplingMode": 0,
+        "NEDenabled": {
+            "expContrast": 10.0,
+            "expLinewidth": 30000000.0,
+            "autoUpdate": false
+        },
+        "checkStopCondition": {
+            "stopCondition": 0.7,
+            "contrastThreshold": 0.15
+        },
+        "extraOptions": "- Item: value",
+        "secondSpan": false
+    },
+    "scanHeightControl": {
+        "scanHeightType": "Fixed Distance",
+        "slant_x/y": "WRONG / old values! TODO: currently measured after written",
+        "scanDistance": 9e-08,
+        "average": 100,
+        "engage_every_x": 1,
+        "warm_up_time": 2,
+        "slant_x": 0.0,
+        "slant_y": 0.0,
+        "same_afm_direction": false
+    },
+    "alignement": {
+        "trackerNr": 0.3,
+        "trackAtBeginning": true,
+        "enablePlayback": true,
+        "acquire_second_pillar_data": false
+    },
+    "rect": {
+        "center": [
+            -0.000265213592859912,
+            -0.000268478597814256
+        ],
+        "coarsePosition": [
+            -0.00026493915475199996,
+            -0.000276344802576
+        ],
+        "size": [
+            8e-07,
+            8e-07
+        ],
+        "angle": 0.0
+    },
+    "resolution": [
+        65,
+        65
+    ],
+    "fastAxis": "X",
+    "pattern": "Meander",
+    "slewRate": 1e-06,
+    "PID": {
+        "iGain": 15.0,
+        "iGainApproach": 800.0
+    },
+    "moke": {
+        "gain": "2/3",
+        "calibration [1/deg]": 1.0
+    },
+    "units": {
+        "odmr:mTesla0": "mT",
+        "odmr:Gauss0": "G",
+        "odmr:resonanceFrequency0": "Hz",
+        "odmr:resonanceFrequency_err0": "Hz",
+        "odmr:FWHM0": "Hz",
+        "odmr:FWHM_err0": "Hz",
+        "odmr:contrast0": "",
+        "odmr:contrast_err0": "",
+        "odmr:sensitivity0": "T/sqrt(Hz)",
+        "odmr:integrationTime": "s",
+        "odmr:intensity": "1/s",
+        "afm:height": "m",
+        "afm:amplitude": "V",
+        "afm:phase": "\u00b0",
+        "afm:frequency": "Hz",
+        "afm:scanHeight": "m",
+        "afm:refPointX": "m",
+        "afm:refPointY": "m",
+        "afm:refPointZ": "m",
+        "afm:zDist": "m",
+        "afm:success": "",
+        "moke:difference": "",
+        "moke:A": "",
+        "moke:B": "",
+        "moke:arctan((A-diff)/A)": "",
+        "moke:difference/(A+B)": ""
+    }
+}

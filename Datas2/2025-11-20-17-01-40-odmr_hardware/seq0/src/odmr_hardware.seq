@@ -1,0 +1,25 @@
+
+- iterate 1:
+  - inline: |
+      $Item = value
+      $evalname = 'odmr'
+      $switchingPeriod = 2e-05
+      $dfStart = -200000000.0
+      $fStep = 4000000.0
+      $mwAmp = 0.55
+      $noRef = True
+      $pulseLength = 
+      $readoutTime = 
+      $laserOffPulse = 
+      $laserOnPulse = 
+      $laserWaitTime = 1u
+      $mwWaitTime = 0.1u
+
+- iterate 1:
+  - C:\Users\Supervisor\QS3\Pulse Programs\Pulse Files\trigger.pf
+- iterate 100 :
+  - evaluate luminescence(name='odmr'):
+    - "evaluate odmr_hardwareSweep(fStart=2300000000.0, fStep=4000000.0, nSteps=100, nrPeaks=1, fitGuess=None, fitBounds=None, noRef=True, dualMode=False, name='odmr', NEDenabled=False, expContrast=None, expLinewidth=None)":
+      - C:\Users\Supervisor\QS3\Pulse Programs\Pulse Files\odmrHW.pf
+
+

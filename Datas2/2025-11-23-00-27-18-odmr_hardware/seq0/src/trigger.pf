@@ -1,0 +1,7 @@
+% Variable definitions
+$triggertime = 500n
+
+% Pulse sequence
+%Duration	Channel	Laser	Waveforms
+
+$triggertime	0	0	delay#1	delay#1

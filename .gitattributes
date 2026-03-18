@@ -1,0 +1,9 @@
+/fit_peaks.ipynb filter=lfs diff=lfs merge=lfs -text
+/fit_peaks_with_freq.ipynb filter=lfs diff=lfs merge=lfs -text
+/hyperparameter_search_results.pt filter=lfs diff=lfs merge=lfs -text
+/odmr.txt filter=lfs diff=lfs merge=lfs -text
+/total_file/seq0/eval/odmr.txt filter=lfs diff=lfs merge=lfs -text
+Datas2/**/odmr.txt filter=lfs diff=lfs merge=lfs -text
+odmr06_20.txt filter=lfs diff=lfs merge=lfs -text
+Datas2/**/*.h5 filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
