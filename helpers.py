@@ -244,7 +244,8 @@ def build_date_list(root=ROOT_DATAS2, suffix="-odmr_hardware"):
     root = Path(root)
     dates = []
 
-    for d in root.iterdir():
+    #for d in root.iterdir():
+    for d in root.rglob(f"*{suffix}"):
         if d.is_dir() and d.name.endswith(suffix):
             # on enlève le suffixe pour ne garder que "2025-11-22-09-40-00"
             date_str = d.name[:-len(suffix)]
