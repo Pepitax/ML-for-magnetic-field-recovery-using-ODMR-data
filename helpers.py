@@ -20,6 +20,8 @@ import matplotlib.patches as mpatches
 from matplotlib.patches import Rectangle
 from contextlib import contextmanager
 
+import re
+
 
 
 
@@ -149,26 +151,53 @@ def convert_to_txt(h5_name, txt_name=None, dataset="data",
 # Chemin racine vers le dossier Datas2 contenant les données
 ROOT_DATAS2 = Path(r"C:\Users\herma\OneDrive\Bureau\Etudes EPFL\PDM\Datas2")
 
+def extract_measure_date(path: Path):
+    """
+    Cherche une date dans le chemin.
+    Priorité au format complet YYYY-MM-DD-HH-MM-SS,
+    sinon fallback sur YYYY-MM-DD.
+    """
+    for part in reversed(path.parts):
+        m = re.search(r"\d{4}-\d{2}-\d{2}-\d{2}-\d{2}-\d{2}", part)
+        if m:
+            return datetime.strptime(m.group(), "%Y-%m-%d-%H-%M-%S")
+
+    for part in reversed(path.parts):
+        m = re.search(r"\d{4}-\d{2}-\d{2}", part)
+        if m:
+            return datetime.strptime(m.group(), "%Y-%m-%d")
+
+    return None
+
 def convert_all_odmr_and_scalar(root=ROOT_DATAS2, show_skip=True, date_min=None):   #date_min="2025-06-01"
     root = Path(root)
     print(f"Parcours de {root} ...\n")
 
+    if isinstance(date_min, str):
+        date_min = datetime.strptime(date_min, "%Y-%m-%d")
+
     for dirpath, dirnames, filenames in os.walk(root):
         dirpath = Path(dirpath)
-        if date_min is not None:
-            if isinstance(date_min, str):
-                date_min = datetime.strptime(date_min, "%Y-%m-%d")
-            try:
-                mesure_date = datetime.strptime(dirpath.name[:19], "%Y-%m-%d-%H-%M-%S")
-                if mesure_date < date_min:
-                    continue
-            except ValueError:
-                pass
+        # ancienne version du code
+        # if date_min is not None:
+        #     if isinstance(date_min, str):
+        #         date_min = datetime.strptime(date_min, "%Y-%m-%d")
+        #     try:
+        #         mesure_date = datetime.strptime(dirpath.name[:19], "%Y-%m-%d-%H-%M-%S")
+        #         if mesure_date < date_min:
+        #             continue
+        #     except ValueError:
+        #         pass
 
         # ----- odmr.h5 -----
         if "odmr.h5" in filenames:
             h5_path = dirpath / "odmr.h5"
             txt_path = h5_path.with_suffix(".txt")
+            #ajout pour labo
+            if date_min is not None:
+                mesure_date = extract_measure_date(h5_path)
+                if mesure_date is not None and mesure_date < date_min:
+                    continue
 
             if txt_path.exists():
                 if show_skip:
@@ -188,6 +217,11 @@ def convert_all_odmr_and_scalar(root=ROOT_DATAS2, show_skip=True, date_min=None)
         if "scalarData.h5" in filenames:
             h5_path = dirpath / "scalarData.h5"
             txt_path = h5_path.with_suffix(".txt")
+            #ajout labo
+            if date_min is not None:
+                mesure_date = extract_measure_date(h5_path)
+                if mesure_date is not None and mesure_date < date_min:
+                    continue
 
             if txt_path.exists():
                 if show_skip:
