@@ -240,15 +240,27 @@ def convert_all_odmr_and_scalar(root=ROOT_DATAS2, show_skip=True, date_min=None)
     print("\nTerminé (fichiers .h5 convertis en .txt)")
 
 #Liste de dates :
-def build_date_list(root=ROOT_DATAS2, suffix="-odmr_hardware"):
+def build_date_list(root=ROOT_DATAS2, suffix="-odmr_hardware", date_min=None):
     root = Path(root)
     dates = []
+    if isinstance(date_min, str):
+        date_min = datetime.strptime(date_min, "%Y-%m-%d")
 
     #for d in root.iterdir():
     for d in root.rglob(f"*{suffix}"):
         if d.is_dir() and d.name.endswith(suffix):
             # on enlève le suffixe pour ne garder que "2025-11-22-09-40-00"
+            #date_str = d.name[:-len(suffix)]
+            #dates.append(date_str)
+
+            # code corrigé pour le labo
             date_str = d.name[:-len(suffix)]
+            try:
+                date_obj = datetime.strptime(date_str, "%Y-%m-%d-%H-%M-%S")
+            except ValueError:
+                continue
+            if date_min is not None and date_obj < date_min:
+                continue
             dates.append(date_str)
 
     # tri (les strings de ce format se trient déjà dans l'ordre chronologique)
