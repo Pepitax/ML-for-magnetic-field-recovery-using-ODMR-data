@@ -556,6 +556,7 @@ def plot_fits_on_spectrograms(df, NORMALIZE, SMOOTH_WIN,
                   freq_à_gauche=False,
                   baseline_to_zero=False,
                   old_init_sym=True,
+                  n_peaks=2,
                   ):              
     """
     Grille de sweeps autour de (center_i, center_j).
@@ -672,6 +673,43 @@ def plot_fits_on_spectrograms(df, NORMALIZE, SMOOTH_WIN,
                                 "mode": "none", "subset": used_side})
                 continue
 
+            if n_peaks == 1:
+                fit1 = fit_one_peak(
+                    x_used, y_used,
+                    model=fit_model,
+                    baseline_to_0=baseline_to_zero
+                )
+
+                if fit1.get("success"):
+                    a1p, x1p, w1p, b0p, b1p = fit1["popt"]
+                    if show_plots:
+                        ax.plot(x_used, fit1["yfit"], linestyle="--", linewidth=1, label="fit (1-peak)")
+                        ax.axvline(x1p, linestyle=":", linewidth=0.9)
+
+                    records.append({
+                        "i": int(i_), "j": int(j_),
+                        "xv1": float(x1p), "xv2": float(x1p),
+                        "mode": "one_peak", "subset": used_side
+                    })
+                else:
+                    k0 = int(np.argmin(y_used))
+                    x0 = float(x_used[k0])
+                    if show_plots:
+                        ax.axvline(x0, linestyle=":", linewidth=0.9)
+
+                    records.append({
+                        "i": int(i_), "j": int(j_),
+                        "xv1": float(x0), "xv2": float(x0),
+                        "mode": "one_peak", "subset": used_side
+                    })
+
+                if show_plots:
+                    ax.set_ylim(0.80, 1.09)
+                    if mark_two_min and legend != "none":
+                        ax.legend(fontsize=legend_fontsize, loc=legend_loc,
+                                  frameon=False, handlelength=1.0, handletextpad=0.3, borderpad=0.2)
+                continue
+
             # --- Fit 2-pics + décision ---
             #fit = fit_two_peaks(x, y, model=fit_model, min_sep_frac=min_separation_peak)
             fit = fit_two_peaks(x_used, y_used, model=fit_model, min_sep_frac=min_separation_peak, init=initialisation, maponly=maponly_, baseline_to_0=baseline_to_zero, scale=scale, oldversion=old_init_sym)
@@ -704,7 +742,8 @@ def plot_fits_on_spectrograms(df, NORMALIZE, SMOOTH_WIN,
                         x_hint, w_hint, a_hint = x_big, w_big, a_big
 
                     fit1 = fit_one_peak(x_used, y_used, model=fit_model,
-                                        x0_hint=x_hint, w_hint=w_hint, a_hint=a_hint)
+                                        x0_hint=x_hint, w_hint=w_hint, a_hint=a_hint,
+                                        baseline_to_0=baseline_to_zero)
 
                     if fit1.get("success"):
                         a1p, x1p, w1p, b0p, b1p = fit1["popt"]
